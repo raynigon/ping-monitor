@@ -10,10 +10,12 @@ containing a small skript which sends ICMP pings and stores the results in the I
 ## Metrics
 
 Currently following metrics are supported:
-- active: Flag which indicates if a connection was possible
-- round_trip_time_max: Longest running ping in a batch
-- round_trip_time_min: Shortest running ping in a batch
-- round_trip_time_avg: Average RTT for a batch
+- active: Flag which indicates if a connection was possible 
+  - 0: connection failed
+  - 1: connection was ok
+- round_trip_time_max: Longest running ping in a batch (in ms)
+- round_trip_time_min: Shortest running ping in a batch (in ms)
+- round_trip_time_avg: Average RTT for a batch (in ms)
 
 ## Used Libraries
 
