@@ -1,7 +1,7 @@
 import secrets
 import string
 
-def generate_password()
+def generate_password():
     alphabet = string.ascii_letters + string.digits
     password = ''.join(secrets.choice(alphabet) for i in range(20))
     return password
@@ -14,5 +14,7 @@ lines = [
     f"GRAFANA_USERNAME=admin\n",
     f"GRAFANA_PASSWORD={generate_password()}\n"
 ]
-with open(".env", "w"):
+
+with open(".env", "w") as file:
+    file.writelines(lines)
     
