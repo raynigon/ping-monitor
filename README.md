@@ -7,6 +7,12 @@ This setup starts three docker containers.
 Grafana for UI, InfluxDB as storage and a python docker container,
 containing a small skript which sends ICMP pings and stores the results in the InfluxDB.
 
+## Prerequisites
+
+* Docker
+* Docker Compose
+* Python 3
+
 ## Installation
 
 1. Clone Repository
