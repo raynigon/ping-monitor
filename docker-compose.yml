@@ -2,8 +2,6 @@ version: '2'
 services:
   influxdb:
     image: influxdb:latest
-    ports:
-      - '8086:8086'
     volumes:
       - influxdb-storage:/var/lib/influxdb
     environment:
