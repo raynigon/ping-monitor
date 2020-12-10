@@ -22,4 +22,3 @@ print("Run `docker-compose up --build` to get started")
 
 with open(".env", "w") as file:
     file.writelines(lines)
-    
