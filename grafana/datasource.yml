@@ -3,9 +3,9 @@ datasources:
   - name: InfluxDB
     type: influxdb
     access: proxy
-    database: rpi
-    user: admin
-    password: admin
+    database: $INFLUXDB_DB
+    user: $INFLUXDB_ADMIN_USER
+    password: $INFLUXDB_ADMIN_PASSWORD
     url: http://influxdb:8086
     isDefault: true
     editable: true
