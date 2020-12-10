@@ -12,7 +12,8 @@ lines = [
     f"INFLUXDB_PASSWORD={generate_password()}\n"
     f"INFLUXDB_DATABASE=network\n",
     f"GRAFANA_USERNAME=admin\n",
-    f"GRAFANA_PASSWORD={generate_password()}\n"
+    f"GRAFANA_PASSWORD={generate_password()}\n",
+    f"PING_HOSTS=1.1.1.1,google.com\n"
 ]
 
 with open(".env", "w") as file:

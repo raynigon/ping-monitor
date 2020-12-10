@@ -32,16 +32,18 @@ def create_fields(r: pythonping.executor.ResponseList):
     }
 
 
-def ping_and_save():
+def ping_and_save(host):
     fields = {}
     try:
-        r = pythonping.ping('raynigon.de')
+        r = pythonping.ping(host)
     except Exception as e:
         r = None
     client.write_points([
         {
             "measurement": "network_ping",
-            "tags": {},
+            "tags": {
+                "host": host
+            },
             "time": datetime.datetime.utcnow().isoformat(),
             "fields": create_fields(r)
         }
@@ -55,6 +57,8 @@ while True:
         print(e)
         time.sleep(5)
 
+ping_hosts = os.getenv("PING_HOSTS", "8.8.8.8").split(",")
 while True:
-    ping_and_save()
+    for host in ping_hosts:
+        ping_and_save(host)
     time.sleep(5)

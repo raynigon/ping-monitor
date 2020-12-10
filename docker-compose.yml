@@ -31,6 +31,7 @@ services:
       - INFLUXDB_USERNAME=${INFLUXDB_USERNAME}
       - INFLUXDB_PASSWORD=${INFLUXDB_PASSWORD}
       - INFLUXDB_DATABASE=${INFLUXDB_DATABASE}
+      - PING_HOSTS=${PING_HOSTS}
 volumes:
   influxdb-storage:
   grafana-storage:
