@@ -26,9 +26,9 @@ def create_fields(r: pythonping.executor.ResponseList):
         active = 1
     return {
         "active": active,
-        "round_trip_time_max": r.rtt_avg*1000,
-        "round_trip_time_min": r.rtt_min*1000,
-        "round_trip_time_avg": r.rtt_avg*1000
+        "round_trip_time_max": float(r.rtt_avg*1000),
+        "round_trip_time_min": float(r.rtt_min*1000),
+        "round_trip_time_avg": float(r.rtt_avg*1000)
     }
 
 
