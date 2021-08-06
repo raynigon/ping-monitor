@@ -18,6 +18,148 @@
   "links": [],
   "panels": [
     {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
+          },
+          "mappings": [],
+          "unit": "percentunit"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Online"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Offline"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "red",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 6,
+        "x": 0,
+        "y": 0
+      },
+      "id": 6,
+      "options": {
+        "displayLabels": [
+          "value"
+        ],
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "pieType": "pie",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "alias": "Online",
+          "groupBy": [],
+          "hide": true,
+          "measurement": "network_ping",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT COUNT(\"active\") FROM \"network_ping\" WHERE $timeFilter AND active > 0",
+          "rawQuery": true,
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "active"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": []
+        },
+        {
+          "alias": "Offline",
+          "groupBy": [],
+          "hide": true,
+          "measurement": "network_ping",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT COUNT(\"active\") FROM \"network_ping\" WHERE $timeFilter AND active < 1",
+          "rawQuery": true,
+          "refId": "B",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "active"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": []
+        },
+        {
+          "datasource": "__expr__",
+          "expression": "$A/($A+$B)",
+          "hide": false,
+          "refId": "Online",
+          "type": "math"
+        },
+        {
+          "datasource": "__expr__",
+          "expression": "$B/($A+$B)",
+          "hide": false,
+          "refId": "Offline",
+          "type": "math"
+        }
+      ],
+      "title": "Uptime",
+      "type": "piechart"
+    },
+    {
       "aliasColors": {},
       "bars": false,
       "dashLength": 10,
@@ -25,7 +167,6 @@
       "datasource": null,
       "fieldConfig": {
         "defaults": {
-          "custom": {},
           "links": []
         },
         "overrides": []
@@ -34,8 +175,8 @@
       "fillGradient": 0,
       "gridPos": {
         "h": 10,
-        "w": 24,
-        "x": 0,
+        "w": 18,
+        "x": 6,
         "y": 0
       },
       "hiddenSeries": false,
@@ -56,7 +197,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.3.4",
+      "pluginVersion": "8.0.6",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -68,6 +209,12 @@
         {
           "alias": "$tag_host",
           "groupBy": [
+            {
+              "params": [
+                "$interval"
+              ],
+              "type": "time"
+            },
             {
               "params": [
                 "host"
@@ -87,6 +234,10 @@
                   "active"
                 ],
                 "type": "field"
+              },
+              {
+                "params": [],
+                "type": "min"
               }
             ]
           ],
@@ -142,7 +293,6 @@
       "datasource": null,
       "fieldConfig": {
         "defaults": {
-          "custom": {},
           "links": []
         },
         "overrides": []
@@ -173,7 +323,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.3.4",
+      "pluginVersion": "8.0.6",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -185,6 +335,12 @@
         {
           "alias": "$tag_host",
           "groupBy": [
+            {
+              "params": [
+                "$interval"
+              ],
+              "type": "time"
+            },
             {
               "params": [
                 "host"
@@ -204,6 +360,10 @@
                   "round_trip_time_avg"
                 ],
                 "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
               }
             ]
           ],
@@ -259,7 +419,6 @@
       "datasource": null,
       "fieldConfig": {
         "defaults": {
-          "custom": {},
           "links": []
         },
         "overrides": []
@@ -270,7 +429,7 @@
         "h": 12,
         "w": 24,
         "x": 0,
-        "y": 10
+        "y": 22
       },
       "hiddenSeries": false,
       "id": 3,
@@ -290,7 +449,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.3.4",
+      "pluginVersion": "8.0.6",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -302,6 +461,12 @@
         {
           "alias": "$tag_host",
           "groupBy": [
+            {
+              "params": [
+                "$interval"
+              ],
+              "type": "time"
+            },
             {
               "params": [
                 "host"
@@ -321,6 +486,10 @@
                   "round_trip_time_min"
                 ],
                 "type": "field"
+              },
+              {
+                "params": [],
+                "type": "min"
               }
             ]
           ],
@@ -376,7 +545,6 @@
       "datasource": null,
       "fieldConfig": {
         "defaults": {
-          "custom": {},
           "links": []
         },
         "overrides": []
@@ -387,7 +555,7 @@
         "h": 12,
         "w": 24,
         "x": 0,
-        "y": 10
+        "y": 34
       },
       "hiddenSeries": false,
       "id": 4,
@@ -407,7 +575,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.3.4",
+      "pluginVersion": "8.0.6",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -419,6 +587,12 @@
         {
           "alias": "$tag_host",
           "groupBy": [
+            {
+              "params": [
+                "$interval"
+              ],
+              "type": "time"
+            },
             {
               "params": [
                 "host"
@@ -438,6 +612,10 @@
                   "round_trip_time_max"
                 ],
                 "type": "field"
+              },
+              {
+                "params": [],
+                "type": "max"
               }
             ]
           ],
@@ -486,15 +664,15 @@
       }
     }
   ],
-  "refresh": "5s",
-  "schemaVersion": 26,
+  "refresh": "1d",
+  "schemaVersion": 30,
   "style": "dark",
   "tags": [],
   "templating": {
     "list": []
   },
   "time": {
-    "from": "now-5m",
+    "from": "now-7d",
     "to": "now"
   },
   "timepicker": {
