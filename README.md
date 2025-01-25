@@ -6,7 +6,7 @@ A simple application to monitor network uptime at home.
 I used this to determine when connection to my ISP was instable.
 This setup starts three docker containers.
 Grafana for UI, InfluxDB as storage and a python docker container,
-containing a small skript which sends ICMP pings and stores the results in the InfluxDB.
+containing a small script which sends ICMP pings and stores the results in the InfluxDB.
 
 ## Prerequisites
 
